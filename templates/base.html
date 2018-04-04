@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<meta charset="utf-8">
+<title>{% block head_title %}College Events{% endblock head_title %}</title>
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}"></link>
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" /></link>
+<link rel="icon" type="image/ico" href="{%  static 'images/favicon.ico' %}" /></link>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="{% url 'events:index' %}">
+      <img src="{% static 'images/logo.png' %}" width="200" height="40" ></img>
+    </a>
+    <div class="collapse navbar-collapse" id="nav-content">
+      <ul class="navbar-nav mr-auto">
+  		  {% url 'home' as home %} {% url 'about' as about %} {% url 'forum' as forum %} {% url 'contact' as contact %}
+        <li {% if request.path == home %} class="nav-item active" {% endif %}>
+          <a class="nav-link" href="{% url 'events:index' %}">Home</a>
+        </li>
+  		  <li {% if request.path == about %} class="nav-item active" {% endif %}>
+  			  <a class="nav-link" href="{% url 'events:about' %}">About</a>
+  			</li>
+        <li {% if request.path == forum %} class="nav-item active" {% endif %}>
+          <a class="nav-link" href="{% url 'events:forum' %}">Forum</a>
+        </li>
+  			<li {% if request.path == contact %} class="nav-item active" {% endif %}>
+  			  <a class="nav-link" href="{% url 'events:contact' %}">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <br/>
+  {% block content %}
+  {% endblock %}
+
+  {% block footer %}
+  {% endblock footer %}
+</body>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/jquery-3.2.1.slim.min.js' %}"></script>
+<!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<!-- Popper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<!-- Latest compiled and minified Bootstrap JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!-- Initialize Bootstrap functionality -->
+
+<script>
+// Initialize tooltip component
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+// Initialize popover component
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+</script>
+</html>

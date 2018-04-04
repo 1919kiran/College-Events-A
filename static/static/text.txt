@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">
+        <img src="{% static 'images/logo.png' %}" width="200" height="40" ></img>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+		{% url 'home' as home %} {% url 'about' as about %} {% url 'forum' as forum %} {% url 'contact' as contact %}
+          <li {% if request.path == home %} class="nav-item active" {% endif %}>
+            <a class="nav-link" href="{% url 'events:index' %}">Home</a>
+          </li>
+		  <li {% if request.path == about %} class="nav-item active" {% endif %}>
+			<a class="nav-link" href="{% url 'events:about' %}">About</a>
+			</li>
+          <<li {% if request.path == forum %} class="nav-item active" {% endif %}>
+          <a class="nav-link" href="{% url 'events:forum' %}">Forum</a>
+        </li>
+			<li {% if request.path == contact %} class="nav-item active" {% endif %}>
+			<a class="nav-link" href="{% url 'events:contact' %}">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>

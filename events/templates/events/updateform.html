@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <br/><br/><br/>
+  <form method = 'POST' action="#">{% csrf_token %}
+    {{ form.as_p  }}
+    <input type='submit' value='Update Event' />
+  </form>
+{% endblock content %}
+{% block footer %}
+<footer class="footer" style="position: fixed;bottom:0em;background-color: black">
+  <div class="container">
+    <span class="text-muted">&copy; Copyright 2018.</span>
+  </div>
+</footer>
+{% endblock footer %}

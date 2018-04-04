@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block head_title %}{{ instance.name }}{% endblock head_title %}
+{% block content %}
+  <br/><br/><br/>
+  <div>
+    <a>Name: {{ event.name|linebreaks }}</a><br>
+    <a>Tag: {{ event.tag|linebreaks }}</a><br>
+    <a>Description: {{ event.description|linebreaks }}</a><br>
+    <a>Date: {{ event.date|linebreaks }}</a><br>
+    <a>Organiser: {{ event.organiser|linebreaks }}</a><br>
+    <a>Contact: {{ event.contact|linebreaks }}</a><br>
+  </div>
+{% endblock content %}
+{% block footer %}
+<footer class="footer" style="position: fixed;bottom:0em;background-color: black">
+  <div class="container">
+    <span class="text-muted">&copy; Copyright 2018.</span>
+  </div>
+</footer>
+{% endblock footer %}

@@ -24,7 +24,7 @@ def create(request):
         messages.error(request, "Could not create Event")
     return render(request, 'createform.html', {'form': form})
 
-#Updating an event
+#Updating an event.
 def update(request, slug=None):
     instance = get_object_or_404(Event, tag=slug)
     form = EventForm(request.POST or None, instance)

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<form id="myform" action="{% url 'forum:ask_questions' %}" class="fs-form fs-form-full" autocomplete="off" method="POST">
+  {% csrf_token %}
+
+  <br>
+  <br>
+  <center>
+  <h2>Enter the question:</h2>
+	  <input class="fs-anim-lower" id="q2" name="question" type="text"  size="50"/>
+
+    <br>
+    <br>
+
+      <button class="fs-submit" type="submit" %}>Ask!</button>
+  </center>
+</form>
+ {% endblock content%}
+
+  {% block footer %}
+<footer class="footer" style="position: fixed;bottom:0em;background-color: black">
+  <div class="container">
+    <span class="text-muted">&copy; Copyright 2018.</span>
+  </div>
+</footer>
+{% endblock footer %}
+

@@ -22,6 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('events/', include('events.urls', namespace='events')),
     path('accounts/', include('accounts.urls')),
+    path('forum/', include('forum.urls')),
+
 ]
 
 if settings.DEBUG:

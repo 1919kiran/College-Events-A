@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<h1>{{ question.question_text }}</h1>
+<br>
+<br>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% if answers %}
+
+<ul>
+{% for answer in answers %}
+    <li>{{ answer.answer_text }}</li>
+{% endfor %}
+</ul>
+
+{% else %}
+    <h2>No answers to display</h2>
+{% endif %}
+
+
+<br>
+<textarea rows="4" cols="50" name="answer" form="usrform" placeholder="Enter your answer...!"></textarea>
+<br>
+<form action="{% url 'forum:display_ans' question.id %}" id="usrform" method="POST"> <!--{#question.id#}save_answers-->
+  {% csrf_token %}
+  <input type="submit">
+</form>
+
+{% endblock content %}
+
+  {% block footer %}
+<footer class="footer" style="position: fixed;bottom:0em;background-color: black">
+  <div class="container">
+    <span class="text-muted">&copy; Copyright 2018.</span>
+  </div>
+</footer>
+{% endblock footer %}
+

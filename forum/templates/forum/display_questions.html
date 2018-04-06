@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<br>
+    {% if all_questions %}
+            <ul>
+                {% for question in all_questions %}
+                    <li>
+                        <h3><a href="{% url 'forum:display_ans' question.id %}">{{question.question_text}}</a></h3>
+                    </li>
+                {%endfor%}
+            </ul>
+        {% else %}
+            <h1>No questions to display!!!</h1>
+        {% endif %}
+
+ {% endblock content%}
+
+  {% block footer %}
+<footer class="footer" style="position: fixed;bottom:0em;background-color: black">
+  <div class="container">
+    <span class="text-muted">&copy; Copyright 2018.</span>
+  </div>
+</footer>
+{% endblock footer %}

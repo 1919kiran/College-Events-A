@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<br>
+<center>
+    <input type="button" onclick="location.href='{% url 'forum:ask' %}';" value="Ask a question!" />
+    <br>
+
+    <br>
+    <input type="button" onclick="location.href='{% url 'forum:display_ques' %}';" value=" View questions" />
+</center>
+
+{% endblock content%}
+
+
+  {% block footer %}
+<footer class="footer" style="position: fixed;bottom:0em;background-color: black">
+  <div class="container">
+    <span class="text-muted">&copy; Copyright 2018.</span>
+  </div>
+</footer>
+{% endblock footer %}

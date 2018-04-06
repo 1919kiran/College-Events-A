@@ -18,6 +18,7 @@
     <div class="collapse navbar-collapse" id="nav-content">
       <ul class="navbar-nav mr-auto">
   		  {% url 'home' as home %} {% url 'about' as about %} {% url 'forum' as forum %} {% url 'contact' as contact %}
+          <!-- 'home' , etc are urls which inturn call the views-->
         <li {% if request.path == home %} class="nav-item active" {% endif %}>
           <a class="nav-link" href="{% url 'events:index' %}">Home</a>
         </li>

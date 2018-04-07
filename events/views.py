@@ -27,7 +27,7 @@ def create(request):
 #Updating an event
 def update(request, slug=None):
     instance = get_object_or_404(Event, tag=slug)
-    form = EventForm(request.POST or None, instance)
+    form = EventForm(request.POST or None, instance=instance)
 
     if form.is_valid():
         instance = form.save(commit=False)

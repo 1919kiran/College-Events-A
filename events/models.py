@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from datetime import datetime
+from django.conf import settings
 from django.db.models.signals import pre_save
 from django.utils.timezone import now as timezone
 from django.urls import reverse
@@ -13,7 +14,7 @@ class Event(models.Model):
     tag = models.SlugField()
     description = models.TextField(default = '')
     date = models.DateTimeField(default=datetime.now())
-    organiser = models.CharField(max_length = 32)
+    organiser = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE,)
     contact = models.EmailField(default="abc@gmail.com")
 
     def __str__(self):

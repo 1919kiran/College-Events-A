@@ -5,7 +5,7 @@ from django.db.models.signals import pre_save
 from django.utils.timezone import now as timezone
 from django.urls import reverse
 import random, string
-from .utils import unique_slug_generator, random_string_generator
+from . utility import unique_slug_generator
 
 # Create your models here.
 class Event(models.Model):

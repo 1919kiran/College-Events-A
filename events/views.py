@@ -5,7 +5,7 @@ from .forms import EventForm
 
 # Create your views here.
 def about(request):
-    return render(request, 'events/about.html')
+    return render(request, 'about.html')
 
 def detail(request, slug):
     event = get_object_or_404(Event, tag=slug)
@@ -57,6 +57,10 @@ def forum(request):
     return render(request, 'events/forum.html')
 
 def index(request):
+    events = Event.objects.all().order_by('-date')
+    return render(request, 'events/index.html', {'event_list': events})
+
+def home(request):
     events = Event.objects.all().order_by('-date')
     return render(request, 'events/index.html', {'event_list': events})
 

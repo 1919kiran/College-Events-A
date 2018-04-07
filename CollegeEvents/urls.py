@@ -19,9 +19,11 @@ from django.urls import path, re_path, include
 from django.conf.urls.static import static
 
 urlpatterns = [
+    #re_path(r'^$', include('accounts.urls', namespace='acc')),
+    path('', include('accounts.urls')),
     path('admin/', admin.site.urls),
     path('events/', include('events.urls', namespace='events')),
-    path('accounts/', include('accounts.urls')),
+    path('accounts/', include('accounts.urls', namespace='accounts')),
 ]
 
 if settings.DEBUG:

@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
   <br/><br/><br/>
-  <form method = 'POST' action="#">{% csrf_token %}
-    {{ form.as_p  }}
-    <input type='submit' value='Create Event' />
-  </form>
-{% endblock content %}
-{% block footer %}
-<footer class="footer" style="position: fixed;bottom:0em;background-color: black">
-  <div class="container">
-    <span class="text-muted">&copy; Copyright 2018.</span>
+  <div class="content">
+    <div class="col-md-offset-6">
+      <form method = 'POST' action="#">{% csrf_token %}
+        {{ form|crispy }}
+        <input type='submit' value='Create Event' />
+      </form>
+    </div>
   </div>
-</footer>
-{% endblock footer %}
+{% endblock content %}

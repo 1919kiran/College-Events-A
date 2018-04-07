@@ -25,7 +25,7 @@ SECRET_KEY = '4v$5n#jn@gtcmd0@^aash@t+v==766przh!1vph$guh+o__^0c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,9 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #My apps
     'events.apps.EventsConfig',
     'accounts.apps.AccountsConfig',
+    #Third-party apps
+    'crispy_forms',
 ]
+
+AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -59,6 +64,7 @@ TEMPLATES = [
         'DIRS': [
                 os.path.join(BASE_DIR, 'templates/'),
                 os.path.join(BASE_DIR, 'events/templates/events/'),
+                os.path.join(BASE_DIR, 'accounts/templates/accounts/'),
 
         ],
         'APP_DIRS': True,
@@ -132,3 +138,5 @@ if DEBUG:
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, "static", "static"),
     )
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

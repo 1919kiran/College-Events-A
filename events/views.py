@@ -6,12 +6,12 @@ from .forms import EventForm
 
 # Create your views here.
 def about(request):
-    return render(request, 'about.html')
+    return render(request, 'events/about.html')
 
 def detail(request, slug):
     event = get_object_or_404(Event, tag=slug)
     #return HttpResponse(event.name + event.tag + event.description)
-    return render(request, 'detail.html', {'event':event})
+    return render(request, 'events/detail.html', {'event':event})
 
 #Creating an event
 @login_required
@@ -24,7 +24,7 @@ def create(request):
         return HttpResponseRedirect(instance.get_absolute_url())
     else:
         messages.error(request, "Could not create Event")
-    return render(request, 'createform.html', {'form': form})
+    return render(request, 'events/createform.html', {'form': form})
 
 #Updating an event
 @login_required
@@ -48,7 +48,7 @@ def update(request, slug=None):
         'contact' : instance.contact,
         'form' : form
     }
-    return render(request, 'updateform.html', context)
+    return render(request, 'events/updateform.html', context)
 
 @login_required
 def delete(request, slug=None):

@@ -8,4 +8,6 @@ app_name = 'accounts'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('contact/', views.contact, name='contact'),
+    path('accounts/login/events/', views.events_redirect, name='events_redirect'),
 ]

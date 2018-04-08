@@ -1,11 +1,12 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, HttpResponseRedirect, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Event
 from .forms import EventForm
 
 # Create your views here.
 def about(request):
-    return render(request, 'events/about.html')
+    return render(request, 'about.html')
 
 def detail(request, slug):
     event = get_object_or_404(Event, tag=slug)
@@ -13,6 +14,7 @@ def detail(request, slug):
     return render(request, 'detail.html', {'event':event})
 
 #Creating an event
+@login_required
 def create(request):
     form = EventForm(request.POST or None)
     if form.is_valid():
@@ -25,9 +27,10 @@ def create(request):
     return render(request, 'createform.html', {'form': form})
 
 #Updating an event
+@login_required
 def update(request, slug=None):
     instance = get_object_or_404(Event, tag=slug)
-    form = EventForm(request.POST or None, instance)
+    form = EventForm(request.POST or None, instance=instance)
 
     if form.is_valid():
         instance = form.save(commit=False)
@@ -47,18 +50,17 @@ def update(request, slug=None):
     }
     return render(request, 'updateform.html', context)
 
+@login_required
 def delete(request, slug=None):
     instance = get_object_or_404(Event, tag=slug)
     instance.delete()
     messages.success(request, "Event deleted")
     return redirect('events:index')
 
-def forum(request):
-    return render(request, 'events/forum.html')
-
 def index(request):
     events = Event.objects.all().order_by('-date')
     return render(request, 'events/index.html', {'event_list': events})
 
-def contact(request):
-    return render(request, 'events/contact.html')
+def home(request):
+    events = Event.objects.all().order_by('-date')
+    return render(request, 'events/index.html', {'event_list': events})

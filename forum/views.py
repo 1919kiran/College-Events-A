@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, HttpResponseRedirect, redirect
+from django.contrib.auth.decorators import login_required
 from. import mypythoncode
 from .models import *
 from .forms import *
@@ -46,10 +47,11 @@ def display_ans(request,question_id):
     pass
 '''
 
-
+@login_required
 def ask(request):
     return render(request, 'forum/ask_questions.html', {})
 
+@login_required
 def ask_questions(request):
     if request.method == 'POST':
         form=QuestionForm(request.POST)

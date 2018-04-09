@@ -19,7 +19,7 @@ from django.urls import path, re_path, include
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', include('accounts.urls')),
+    re_path(r'^', include('accounts.urls')),
     path('admin/', admin.site.urls),
     path('events/', include('events.urls', namespace='events')),
     path('accounts/', include('allauth.urls')),

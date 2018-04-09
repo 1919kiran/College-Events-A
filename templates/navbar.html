@@ -10,34 +10,37 @@
   <div class="collapse navbar-collapse" id="nav-content">
     <ul class="navbar-nav mr-auto">
       {% url 'home' as home %} {% url 'about' as about %} {% url 'forum' as forum %} {% url 'contact' as contact %}
-      <li {% if request.path == home %} class="nav-item active" {% endif %}>
+      <li  class="nav-item active" >
         <a class="nav-link" href="{% url 'events:index' %}">Home</a>
       </li>
-      <li {% if request.path == about %} class="nav-item active" {% endif %}>
+      <li class="nav-item active" >
         <a class="nav-link" href="{% url 'events:about' %}">About</a>
       </li>
-      <li {% if request.path == forum %} class="nav-item active" {% endif %}>
+      <li  class="nav-item active" >
         <a class="nav-link" href="{% url 'forum:begin' %}">Forum</a>
       </li>
-      <li {% if request.path == contact %} class="nav-item active" {% endif %}>
+      <li  class="nav-item active" >
         <a class="nav-link" href="{% url 'accounts:contact' %}">Contact</a>
       </li>
     </ul>
-    {% if not request.user.is_authenticated %}
-    {% else %}
+    {% if request.user.is_authenticated %}
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown active">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ request.username }}
+          {{ request.user }}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action1</a>
+          <a class="dropdown-item" href="#">View Profile</a>
           <a class="dropdown-item" href="#">Action2</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
+          <a class="dropdown-item" href="{% url 'account_logout' %}">Sign out</a>
         </div>
       </li>
     </ul>
+    {% else %}
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active"><a class="nav-link" href="{% url 'account_login' %}">Signin</a></li>
+      </ul>
     {% endif %}
   </div>
 </nav>

@@ -8,7 +8,6 @@ class SignupForm(forms.Form):
     is_organiser = forms.BooleanField(required=False)
     is_participant = forms.BooleanField(required=False)
 
-
     class Meta:
         model = get_user_model() # use this function for swapping user model
 
@@ -17,3 +16,9 @@ class SignupForm(forms.Form):
         user.last_name = self.cleaned_data['last_name']
         user.age = self.cleaned_data['age']
         user.save()
+
+class ContactForm(forms.Form):
+
+    name = forms.CharField(required = True, max_length=120, help_text='100 characters max.')
+    email = forms.CharField(required = True)
+    comment = forms.CharField(required = True, widget=forms.Textarea)

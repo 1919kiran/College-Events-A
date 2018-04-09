@@ -1,14 +1,18 @@
-{% extends 'base_scroll.html' %}
+{% extends 'base_sticky.html' %}
 {% load crispy_forms_tags %}
 
 {% block content %}
   <br/><br/><br/>
   <div class="content">
-    <div class="col-md-offset-6">
-      <form method = 'POST' action="#">{% csrf_token %}
-        {{ form|crispy }}
-        <input type='submit' value='Create Event' />
-      </form>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <form method = 'POST' action="#">{% csrf_token %}
+          {{ form|crispy }}
+          <input type='submit' value='Create Event' />
+        </form>
+      </div>
+      <div class="col-md-3"></div>
     </div>
   </div>
 {% endblock content %}

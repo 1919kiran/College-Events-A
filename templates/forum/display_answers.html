@@ -1,41 +1,48 @@
-{% extends 'base_sticky.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
-<br>
-<br>
-<br>
-<h1>{{ question.question_text }}</h1>
-<br>
-<br>
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<div class="row" style="min-height:100%;max-width:100%;">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <br><br><br>
+    <h1>{{ question.question_text }}</h1>
+    <br><br>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-{% if answers %}
+    {% if answers %}
 
-<ul>
-{% for answer in answers %}
-    <li>{{ answer.answer_text }}</li>
-{% endfor %}
-</ul>
+    <ul>
+    {% for answer in answers %}
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <p class="lead">{{ answer.answer_text }}</p>
+        <hr class="my-4">
+        <p class="text-right">answered by: {{request.user.username}}</p>
+      </div>
+    </div>
+    {% endfor %}
+    </ul>
+    {% else %}
+        <h2>No answers to display</h2>
+    {% endif %}
 
-{% else %}
-    <h2>No answers to display</h2>
-{% endif %}
 
-
-<br>
-<textarea rows="4" cols="50" name="answer" form="usrform" placeholder="Enter your answer...!"></textarea>
-<br>
-<form action="{% url 'forum:display_ans' question.id %}" id="usrform" method="POST"> <!--{#question.id#}save_answers-->
-  {% csrf_token %}
-  <input type="submit">
-</form>
-
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1" class="lead">Enter your answer</label>
+      <textarea name="answer" class="form-control" form="usrform" id="exampleFormControlTextarea1" rows="3" placeholder="Enter your answer...!"></textarea>
+    </div>
+    <form action="{% url 'forum:display_ans' question.id %}" id="usrform" method="POST"> <!--{#question.id#}save_answers-->
+      {% csrf_token %}
+      <input type="submit" class="btn btn-primary">
+    </form>
+  </div>
+  <div class="col-md-3"></div>
+</div>
 {% endblock content %}
 
-  {% block footer %}
-<footer class="footer" style="position: fixed;bottom:0em;background-color: black">
+
+<div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <span class="text-muted">&copy; Copyright 2018.</span>
+    <p class="lead">{{ answer.answer_text }}</p>
   </div>
-</footer>
-{% endblock footer %}
+</div>

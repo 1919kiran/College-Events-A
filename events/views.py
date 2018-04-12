@@ -39,7 +39,7 @@ def update(request, slug=None):
         #messages.success(request, "Event details updated")
         return HttpResponseRedirect(instance.get_absolute_url())
     else:
-        pass
+        return render(request, 'events/about.html')
         #messages.error(request, "Could not update Event")
 
     context = {

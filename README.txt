@@ -6,4 +6,4 @@ https://www.youtube.com/watch?v=9Wbfk16jEOk
 https://www.youtube.com/playlist?list=PLw02n0FEB3E3VSHjyYMcFadtQORvl1Ssj
 https://djangoforbeginners.com
 #For front end
-https://www.youtube.com/user/TechGuyWeb 
+https://www.youtube.com/user/TechGuyWeb

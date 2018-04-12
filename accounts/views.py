@@ -4,6 +4,7 @@ from .forms import ContactForm
 from django.conf import settings
 from django.core.mail import send_mail
 from crispy_forms.helper import FormHelper
+from .models import UserProfile, User
 
 # Create your views here.
 def index(request):
@@ -33,3 +34,7 @@ def events_redirect(request):
 
 def signup_redirect(request):
     return redirect('account_login')
+
+def view_profile(request):
+    userprofile = UserProfile.objects.all()
+    return render(request, 'accounts/profile.html',{'userprofile':userprofile})

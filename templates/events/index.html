@@ -128,20 +128,7 @@
     }
   }
 </style>
-
-{% if not messages %}
-  <div class="messages">
-    <ul class="messages">
-      {% for message in messages %}
-      <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
-        {% if "html_safe" in message.tags %}{{ message|safe }}
-        {% else %}{{ message }}
-        {% endif %}
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-{% endif %}
+<!-- Displays error messages if any -->
 
 <div class="pimg">
   <div class="ptext">
@@ -160,10 +147,10 @@
       </div>
     </a>
   </div>
-  <section class="section section-dark">
-    <h2>{{event.name}}</h2>
+  <section class="section section-dark" >
+    <h2><u>{{event.name}}</u></h2>
     <br/>
-    <p>{{event.description|truncatechars:300 }}</p>
+    <p style="text-align:justify;">{{event.description|truncatechars:300 }}</p>
   </section>
 
 {% endfor %}

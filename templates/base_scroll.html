@@ -32,14 +32,17 @@
 <!-- Initialize Bootstrap functionality -->
 
 <script>
-// Initialize tooltip component
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+  // Initialize tooltip component
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 
-// Initialize popover component
-$(function () {
-  $('[data-toggle="popover"]').popover()
-})
+  // Initialize popover component
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+  })
+  function goBack() {
+      window.history.back()
+  }
 </script>
 </html>

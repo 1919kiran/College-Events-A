@@ -11,18 +11,21 @@ from . utility import unique_slug_generator
 # Create your models here.
 class Event(models.Model):
     name = models.CharField(max_length = 32)
-    tag = models.SlugField()
+    tag = models.SlugField(max_length=50)
     description = models.TextField(default = '')
     date = models.DateTimeField(default=datetime.now())
-    organiser = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)
+    organiser = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)#references to User model not UserProfile
     contact = models.EmailField(default="abc@gmail.com")
 
     def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.tag = unique_slug_generator(self)
+        if not self.tag:
+            #if urltag is not existing create a unique url
+            self.tag = unique_slug_generator(self)
         super(Event, self).save()
 
     def get_absolute_url(self):
+        #to get url for events with slugs, since pk is not used
         return reverse("events:detail", kwargs={"slug": self.tag})

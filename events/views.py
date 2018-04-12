@@ -10,7 +10,6 @@ def about(request):
 
 def detail(request, slug):
     event = get_object_or_404(Event, tag=slug)
-    #return HttpResponse(event.name + event.tag + event.description)
     return render(request, 'events/detail.html', {'event':event})
 
 #Creating an event
@@ -20,25 +19,28 @@ def create(request):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        messages.success(request, "Event Created")
+        #messages.success(request, "Event Created") #It is not rendered as it was not fitting with the template
         return HttpResponseRedirect(instance.get_absolute_url())
     else:
-        messages.error(request, "Could not create Event")
+        pass
+        #messages.error(request, "Could not create Event")
     return render(request, 'events/createform.html', {'form': form})
 
 #Updating an event
 @login_required
 def update(request, slug=None):
+    event = Event.objects.get(tag=slug) #checking if logged in user is the organiser of the event
+    organiser_of_event = event.organiser
     instance = get_object_or_404(Event, tag=slug)
     form = EventForm(request.POST or None, instance=instance)
-
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        messages.success(request, "Event details updated")
+        #messages.success(request, "Event details updated")
         return HttpResponseRedirect(instance.get_absolute_url())
     else:
-        messages.error(request, "Could not update Event")
+        pass
+        #messages.error(request, "Could not update Event")
 
     context = {
         'name' : instance.name,
@@ -46,16 +48,22 @@ def update(request, slug=None):
         'date' : instance.date,
         'organiser' : instance.organiser,
         'contact' : instance.contact,
-        'form' : form
+        'form' : form,
+        'organiser_of_event' : organiser_of_event,
     }
     return render(request, 'events/updateform.html', context)
 
 @login_required
 def delete(request, slug=None):
-    instance = get_object_or_404(Event, tag=slug)
-    instance.delete()
-    messages.success(request, "Event deleted")
-    return redirect('events:index')
+    event = Event.objects.get(tag=slug)
+    organiser_of_event = event.organiser
+    if request.user == organiser_of_event:
+        instance = get_object_or_404(Event, tag=slug)
+        instance.delete()
+        messages.success(request, "Event deleted")
+        return redirect('events:index')
+    else:
+        return render(request, 'events/delete.html')
 
 def index(request):
     events = Event.objects.all().order_by('-date')

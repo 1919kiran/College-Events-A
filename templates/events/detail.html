@@ -1,15 +1,20 @@
 {% extends 'base_sticky.html' %}
+{% load crispy_forms_tags %}
 {% block head_title %}{{ instance.name }}{% endblock head_title %}
 {% block content %}
   <br/><br/><br/>
-  <div>
-    <a>Name: {{ event.name|linebreaks }}</a><br>
-    <a>Tag: {{ event.tag|linebreaks }}</a><br>
-    <a>Description: {{ event.description|linebreaks }}</a><br>
-    <a>Date: {{ event.date|linebreaks }}</a><br>
-    <a>Organiser: {{ event.organiser|linebreaks }}</a><br>
-    <a>Contact: {{ event.contact|linebreaks }}</a><br>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <a><strong>Name:</strong> {{ event.name|linebreaks }}</a><br>
+      <a><strong>Description:</strong> {{ event.description|linebreaks }}</a><br>
+      <a><strong>Date:</strong> {{ event.date|linebreaks }}</a><br>
+      <a><strong>Organiser:</strong> {{ event.organiser|linebreaks }}</a><br>
+      <a><strong>Contact:</strong> {{ event.contact|linebreaks }}</a><br>
+    </div>
+    <div class="col-md-3"></div>
   </div>
+
 {% endblock content %}
 {% block footer %}
 <footer class="footer" style="position: fixed;bottom:0em;background-color: black">

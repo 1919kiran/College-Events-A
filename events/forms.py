@@ -12,3 +12,9 @@ class EventForm(forms.ModelForm):
             "organiser",
             "contact",
         ]
+
+class NotificationForm(forms.Form):
+
+    name = forms.CharField(required = True, max_length=120)
+    subject = forms.CharField(required = True, widget=forms.Textarea)
+    body = forms.CharField(required = True, widget=forms.Textarea)

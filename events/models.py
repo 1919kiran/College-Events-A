@@ -10,8 +10,15 @@ from . utility import unique_slug_generator
 
 # Create your models here.
 class Event(models.Model):
+    CLUB_LIST = (
+        ('swa', 'Swayam'),
+        ('it', 'Dept. Of Information Technology'),
+        ('swa', 'CSI'),
+        ('swa', 'TFI'),
+    )
     name = models.CharField(max_length = 32)
     tag = models.SlugField(max_length=50)
+    club = models.CharField(max_length=12, choices=CLUB_LIST, default='it')
     description = models.TextField(default = '')
     date = models.DateTimeField(default=datetime.now())
     organiser = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)#references to User model not UserProfile

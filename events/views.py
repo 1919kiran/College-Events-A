@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Event
 from .forms import EventForm
+from .utility import send_whatsapp_message
 
 # Create your views here.
 def about(request):
@@ -32,6 +33,26 @@ def create(request):
         pass
         #messages.error(request, "Could not create Event")
     return render(request, 'events/createform.html', {'form': form})
+
+@login_required(login_url="logins:login_view")
+def create_notification(request, event):
+    title = 'Contact'
+    form = NotificationForm(request.POST or None)
+    confirm_message = None
+
+    if form.is_valid():
+        name = form.cleaned_data['name']
+        body = form.cleaned_data['comment']
+        subject = 'Message from %s from event %s' %(name) %(event.name)
+        print(subject)
+        message = '%s' %(body)
+        send_whatsapp_message(message)
+        title = "Success!"
+        confirm_message = "All the participants of this events are notified."
+        form = None
+    context = {'title': title, 'form': form, 'confirm_message': confirm_message}
+    return render(request, 'accounts/contact.html', context)
+
 
 #Updating an event
 @login_required(login_url="logins:login_view")

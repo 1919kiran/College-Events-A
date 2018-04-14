@@ -13,10 +13,13 @@
       <a class="lead">Contact: </a><a>{{ event.contact|linebreaks }}</a><br>
       <br><br><br>
       <div class="row">
-          <div class="col-md-3"><button class="btn btn-primary btn-lg btn-block" href="">Create Notification</button></div>
+
           <div class="col-md-3"><button class="btn btn-primary btn-lg btn-block">Delete</button></div>
           <div class="col-md-3">
-            <input type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='{% url "events:view_participants" event.tag %}';" value=" View Participants" />
+            <input type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='{% url "events:view_participants" event.tag %}';" value="View Participants" />
+          </div>
+          <div class="col-md-3">
+            <input type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='{% url "events:create_notification" event.tag %}';" value="Create Notification" />
           </div>
       </div>
     </div>
@@ -31,3 +34,4 @@
   </div>
 </footer>
 {% endblock footer %}
+onclick="location.href='{% url "events:view_participants" event.tag

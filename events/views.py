@@ -2,8 +2,10 @@ from django.shortcuts import render, HttpResponse, get_object_or_404, HttpRespon
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Event
-from .forms import EventForm
+from .forms import EventForm, NotificationForm
 from .utility import send_whatsapp_message
+import os
+from selenium import webdriver
 
 # Create your views here.
 def about(request):
@@ -16,9 +18,10 @@ def detail(request, slug):
 
 @login_required(login_url="logins:login_view")
 def view_participants(request, slug):
+    
     event = get_object_or_404(Event, tag=slug)
     participants = event.participants.all()
-    return render(request,'events/participants_list.html', {'participants':participants})
+    return render(request,'events/participants_list.html', {'DRIVER_PATH':DRIVER_PATH})
 
 #Creating an event
 @login_required(login_url="logins:login_view")
@@ -35,23 +38,23 @@ def create(request):
     return render(request, 'events/createform.html', {'form': form})
 
 @login_required(login_url="logins:login_view")
-def create_notification(request, event):
+def create_notification(request, slug):
+    event = get_object_or_404(Event, tag=slug)
     title = 'Contact'
     form = NotificationForm(request.POST or None)
     confirm_message = None
 
     if form.is_valid():
-        name = form.cleaned_data['name']
-        body = form.cleaned_data['comment']
-        subject = 'Message from %s from event %s' %(name) %(event.name)
+        body = form.cleaned_data['body']
+        subject = 'Message from  from event '
         print(subject)
-        message = '%s' %(body)
+        message = 'asfdfdf\n'
         send_whatsapp_message(message)
         title = "Success!"
         confirm_message = "All the participants of this events are notified."
         form = None
     context = {'title': title, 'form': form, 'confirm_message': confirm_message}
-    return render(request, 'accounts/contact.html', context)
+    return render(request, 'events/notifications.html', context)
 
 
 #Updating an event

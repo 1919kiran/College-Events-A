@@ -15,6 +15,5 @@ class EventForm(forms.ModelForm):
 
 class NotificationForm(forms.Form):
 
-    name = forms.CharField(required = True, max_length=120)
-    subject = forms.CharField(required = True, widget=forms.Textarea)
+    subject = forms.CharField(max_length=100)
     body = forms.CharField(required = True, widget=forms.Textarea)

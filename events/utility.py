@@ -1,6 +1,8 @@
 from django.utils.text import slugify
 from selenium import webdriver
 import random, string, os
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException
 
 def random_string_generator(size, chars=string.ascii_lowercase + string.digits):
     return str(''.join(random.choice(chars) for _ in range(size)))
@@ -22,17 +24,11 @@ def unique_slug_generator(instance, new_tag=None):
 
 def send_whatsapp_message(message):
 
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    DRIVER_PATH = os.path.join(BASE_DIR, 'static/static/driver/chromedriver.exe'),
-    driver = webdriver.Chrome(DRIVER_PATH)
-
     driver = webdriver.Chrome()
     driver.get('https://web.whatsapp.com/')
 
-    name = 'Event Group'
-    
+    name = 'Events'
     input('Enter anything after scanning QR code')
-
     user = driver.find_element_by_xpath('//span[@title = "{}"]'.format(name))
     user.click()
 

@@ -12,6 +12,8 @@
         {% for question in all_questions %}
         <li class="list-group-item d-flex justify-content-between align-items-center">
           <h4><a href="{% url 'forum:display_ans' question.id %}">{{question.question_text}}</a></h4>
+          <!--<p class="text-right">asked by: {{question.asked_by}}</p>-->
+          <p class="text-right">on: {{question.question_pub_date}}</p>
         </li>
         {%endfor%}
       </ul>

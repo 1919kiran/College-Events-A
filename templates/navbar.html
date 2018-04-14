@@ -27,19 +27,26 @@
     <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown active">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ request.user.get_short_name }}
+          {{ request.user.username }}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">View Profile</a>
-          <a class="dropdown-item" href="{% url 'accounts:view_profile' %}">Action2</a>
+          <a class="dropdown-item" href="{% url 'accounts:view_profile' %}">View Profile</a>
+          <a class="dropdown-item" href="{% url 'events:create' %}">Create Event</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'account_logout' %}">Sign out</a>
+<!--          <a class="dropdown-item" href="{% url 'account_logout' %}">Sign out</a>
+-->
+                    <a class="dropdown-item" href="{% url 'logins:logout_view' %}">Sign out</a>
+
         </div>
       </li>
     </ul>
     {% else %}
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active"><a class="nav-link" href="{% url 'account_login' %}">Signin</a></li>
+<!--        <li class="nav-item active"><a class="nav-link" href="{% url 'account_login' %}">Signin</a></li>
+    -->
+                <li class="nav-item active"><a class="nav-link" href="{% url 'logins:signup_view' %}">SignUp</a></li>
+                <li class="nav-item active"><a class="nav-link" href="{% url 'logins:login_view' %}">Signin</a></li>
+
       </ul>
     {% endif %}
   </div>

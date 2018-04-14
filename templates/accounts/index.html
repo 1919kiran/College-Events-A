@@ -76,6 +76,13 @@ h1{
   <br><br><br><br>
   <h1>COLLEGE EVENTS</h1>
   <br><br><br><br>
-  <button data-text="ENTER" onclick="window.location.href='{% url 'account_signup' %}'">ENTER</button>
+<!--  <button data-text="ENTER" onclick="window.location.href='{% url 'account_signup' %}'">ENTER</button>
+-->
+<!--  <button data-text="ENTER" onclick="window.location.href='{% url 'logins:signup_view' %}'">ENTER</button>
+-->
+<button data-text="SignUp" onclick="window.location.href='{% url 'logins:signup_view' %}'">SignUp</button>
+<button data-text="SignIn" onclick="window.location.href='{% url 'logins:login_view' %}'">LogIn</button>
+<button data-text="Home" onclick="window.location.href='{% url 'events:index' %}'">Home</button>
+
 </body>
 {% endblock content %}

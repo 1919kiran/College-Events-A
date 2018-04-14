@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for participants in participants %}
+  <br><br><br><br>
+  <h1>{{participants.email}}</h1>
+{% endfor %}
+{% endblock %}

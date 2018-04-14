@@ -10,10 +10,17 @@ def about(request):
 
 def detail(request, slug):
     event = get_object_or_404(Event, tag=slug)
+    participants = event.participants.all()
     return render(request, 'events/detail.html', {'event':event})
 
+@login_required(login_url="logins:login_view")
+def view_participants(request, slug):
+    event = get_object_or_404(Event, tag=slug)
+    participants = event.participants.all()
+    return render(request,'events/participants_list.html', {'participants':participants})
+
 #Creating an event
-@login_required
+@login_required(login_url="logins:login_view")
 def create(request):
     form = EventForm(request.POST or None)
     if form.is_valid():
@@ -27,7 +34,7 @@ def create(request):
     return render(request, 'events/createform.html', {'form': form})
 
 #Updating an event
-@login_required
+@login_required(login_url="logins:login_view")
 def update(request, slug=None):
     event = Event.objects.get(tag=slug) #checking if logged in user is the organiser of the event
     organiser_of_event = event.organiser
@@ -53,7 +60,7 @@ def update(request, slug=None):
     }
     return render(request, 'events/updateform.html', context)
 
-@login_required
+@login_required(login_url="logins:login_view")
 def delete(request, slug=None):
     event = Event.objects.get(tag=slug)
     organiser_of_event = event.organiser

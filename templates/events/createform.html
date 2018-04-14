@@ -9,7 +9,8 @@
       <div class="col-md-6">
         <form method = 'POST' action="#">{% csrf_token %}
           {{ form|crispy }}
-          <input type='submit' value='Create Event' />
+          <br/>
+          <input type='submit' value='Create Event' class="btn btn-primary"/>
         </form>
       </div>
       <div class="col-md-3"></div>

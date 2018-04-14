@@ -16,6 +16,7 @@ class Event(models.Model):
     date = models.DateTimeField(default=datetime.now())
     organiser = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)#references to User model not UserProfile
     contact = models.EmailField(default="abc@gmail.com")
+    participants = models.ManyToManyField('logins.SignupData', default=1, unique=False, blank=True)
 
     def __str__(self):
         return self.name

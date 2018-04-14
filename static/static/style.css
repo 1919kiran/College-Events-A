@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
 *{
+  font-family: 'Quicksand', sans-serif;
   padding: 0;
   margin: 0;
 }

@@ -13,28 +13,30 @@ from selenium import webdriver
 def about(request):
     return render(request, 'events/about.html')
 
+def index(request):
+    events = Event.objects.all().order_by('-date')
+    return render(request, 'events/index.html', {'event_list': events})
 
-
-
+def home(request):
+    events = Event.objects.all().order_by('-date')
+    return render(request, 'events/index.html', {'event_list': events})
 
 
 
 def select_club(request):
     if request.method=='POST':
         club_name=request.POST.get('club_name')
-        list_of_events=Event.objects.filter(club=club_name)
+        list_of_events=Event.objects.filter(club='club_name')
+        print(club_name)
         return render(request,'events/display_events_under_club.html',{'list_of_events':list_of_events})
     else:
         return render(request,'events/select_club.html',{})
     pass
 
 
-
-
 def detail_of_event(request,slug):
     event=get_object_or_404(Event,tag=slug)
-    return render(request,'events/detail.html',{'event':event})
-
+    return render(request,'events/detail_of_event.html',{'event':event})
 
 
 def detail(request, slug):
@@ -45,7 +47,6 @@ def detail(request, slug):
 
 @login_required(login_url="logins:login_view")
 def view_participants(request, slug):
-
     event = get_object_or_404(Event, tag=slug)
     participants = event.participants.all()
     return render(request,'events/participants_list.html', {'participants':participants})
@@ -127,14 +128,10 @@ def participate(request, slug):
     event = Event.objects.get(tag=slug)
     username = request.user
     current_user = SignupData.objects.get(user=username)
-    print(current_user)
     event.participants.add(current_user)
-    return redirect('events:index')
+    return render(request, 'events/success_participation.html',{})
 
-def index(request):
-    events = Event.objects.all().order_by('-date')
-    return render(request, 'events/index.html', {'event_list': events})
-
-def home(request):
-    events = Event.objects.all().order_by('-date')
-    return render(request, 'events/index.html', {'event_list': events})
+def view_gallery(request, slug):
+    event = get_object_or_404(Event, tag=slug)
+    participants = event.participants.all()
+    return render(request,'events/view_gallery.html', {'participants':participants, 'event':event})

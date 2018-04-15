@@ -19,5 +19,6 @@ urlpatterns = [
     re_path(r'^(?P<slug>[\w-]+)/notify/$', views.create_notification, name='create_notification'),
     re_path(r'^(?P<slug>[\w-]+)/detail_of_event/$', views.detail_of_event, name='detail_of_event'),
     re_path(r'^(?P<slug>[\w-]+)/participate/$', views.participate, name='participate'),
+    re_path(r'^(?P<slug>[\w-]+)/gallery/$', views.view_gallery, name='view_gallery'),
     #path('events/')
 ]

@@ -1,7 +1,9 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, HttpResponseRedirect, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import User
 from .models import Event
+from logins.models import SignupData
 from .forms import EventForm, NotificationForm
 from .utility import send_whatsapp_message
 import os
@@ -11,10 +13,13 @@ from selenium import webdriver
 def about(request):
     return render(request, 'events/about.html')
 
+def index(request):
+    events = Event.objects.all().order_by('-date')
+    return render(request, 'events/index.html', {'event_list': events})
 
-
-
-
+def home(request):
+    events = Event.objects.all().order_by('-date')
+    return render(request, 'events/index.html', {'event_list': events})
 
 
 def select_club(request):
@@ -34,7 +39,6 @@ def detail_of_event(request,event_id):
     return render(request,'events/detail.html',{'event':event})
 
 
-
 def detail(request, slug):
     event = get_object_or_404(Event, tag=slug)
     participants = event.participants.all()
@@ -43,15 +47,14 @@ def detail(request, slug):
 
 @login_required(login_url="logins:login_view")
 def view_participants(request, slug):
-
     event = get_object_or_404(Event, tag=slug)
     participants = event.participants.all()
-    return render(request,'events/participants_list.html', {'DRIVER_PATH':DRIVER_PATH})
+    return render(request,'events/participants_list.html', {'participants':participants})
 
 #Creating an event
 @login_required(login_url="logins:login_view")
 def create(request):
-    form = EventForm(request.POST or None)
+    form = EventForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
@@ -88,14 +91,14 @@ def update(request, slug=None):
     event = Event.objects.get(tag=slug) #checking if logged in user is the organiser of the event
     organiser_of_event = event.organiser
     instance = get_object_or_404(Event, tag=slug)
-    form = EventForm(request.POST or None, instance=instance)
+    form = EventForm(request.POST or None, request.FILES or None, instance=instance)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
         #messages.success(request, "Event details updated")
         return HttpResponseRedirect(instance.get_absolute_url())
     else:
-        return render(request, 'events/about.html')
+        pass
         #messages.error(request, "Could not update Event")
 
     context = {
@@ -121,10 +124,14 @@ def delete(request, slug=None):
     else:
         return render(request, 'events/delete.html')
 
-def index(request):
-    events = Event.objects.all().order_by('-date')
-    return render(request, 'events/index.html', {'event_list': events})
+def participate(request, slug):
+    event = Event.objects.get(tag=slug)
+    username = request.user
+    current_user = SignupData.objects.get(user=username)
+    event.participants.add(current_user)
+    return render(request, 'events/success_participation.html',{})
 
-def home(request):
-    events = Event.objects.all().order_by('-date')
-    return render(request, 'events/index.html', {'event_list': events})
+def view_gallery(request, slug):
+    event = get_object_or_404(Event, tag=slug)
+    participants = event.participants.all()
+    return render(request,'events/view_gallery.html', {'participants':participants, 'event':event})

@@ -9,6 +9,7 @@ class EventForm(forms.ModelForm):
             "tag",
             "club",
             "description",
+            "image",
             "date",
             "organiser",
             "contact",

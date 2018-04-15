@@ -9,7 +9,7 @@ urlpatterns = [
     path('create/', views.create, name='create'),
 
     path('select_club/',views.select_club,name='select_club'),
-    
+
 
     path('home/', views.index, name='home'),
     re_path(r'^(?P<slug>[\w-]+)/$', views.detail, name='detail'),
@@ -18,5 +18,6 @@ urlpatterns = [
     re_path(r'^(?P<slug>[\w-]+)/view_participants/$', views.view_participants, name='view_participants'),
     re_path(r'^(?P<slug>[\w-]+)/notify/$', views.create_notification, name='create_notification'),
     re_path(r'^(?P<slug>[\w-]+)/detail_of_event/$', views.detail_of_event, name='detail_of_event'),
+    re_path(r'^(?P<slug>[\w-]+)/participate/$', views.participate, name='participate'),
     #path('events/')
 ]

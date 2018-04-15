@@ -14,23 +14,23 @@ def upload_location(instance, filename):
 # Create your models here.
 class Event(models.Model):
     CLUB_LIST = (
-        ('swa', 'Swayam'),
-        ('eco','Eco Club'),
-        ('art','Arts club'),
-        ('tst', 'Toast Masters'),
-        ('ora', 'Readers Club'),
-        ('abh', 'Abhinay'),
-        ('thm', 'Theme Ballet'),
-        ('vtk', 'Vasavi talkies'),
-        ('csi', 'CSI'),
+        ('Swayam', 'Swayam'),
+        ('EcoClub','Eco Club'),
+        ('Artsclub','Arts club'),
+        ('ToastMasters', 'Toast Masters'),
+        ('ReadersClub', 'Readers Club'),
+        ('Abhinay', 'Abhinay'),
+        ('ThemeBallet', 'Theme Ballet'),
+        ('VasaviTalkies', 'Vasavi talkies'),
+        ('CSI', 'CSI'),
     )
     name = models.CharField(max_length = 32)
     tag = models.SlugField(max_length=50)
     club = models.CharField(max_length=12, choices=CLUB_LIST)#, default='it')
     description = models.TextField(default = '')
     image = models.ImageField(upload_to=upload_location, null=True, blank=True, width_field="width_field", height_field="height_field")
-    height_field = models.IntegerField(default=0)
-    width_field = models.IntegerField(default=0)
+    height_field = models.IntegerField(default=300)
+    width_field = models.IntegerField(default=600)
     date = models.DateTimeField(default=datetime.now())
     organiser = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)#references to User model not UserProfile
     contact = models.EmailField(default="abc@gmail.com")

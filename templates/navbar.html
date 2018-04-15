@@ -4,8 +4,10 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="{% url 'events:index' %}">
-    <img src="{% static 'images/logo.png' %}" width="200" height="40" ></img>
+
+  <a class="navbar-brand" href="{% url 'logins:landing_page' %}">
+    <img src="{% static 'images/logo.svg' %}" width="60" height="30" class="d-inline-block align-center" alt="">
+    Evention
   </a>
   <div class="collapse navbar-collapse" id="nav-content">
     <ul class="navbar-nav mr-auto">

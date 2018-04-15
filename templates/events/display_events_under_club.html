@@ -6,7 +6,7 @@
   <br><br><br><br><br>
   {% if list_of_events %}
     {% for event in list_of_events %}
-      <a href="{% url 'events:detail_of_event' event.tag %}">{{event.name|linebreaks}}</a>
+      <a href="{% url 'events:detail' event.tag %}">{{event.name|linebreaks}}</a>
     {% endfor %}
 
   {% else %}

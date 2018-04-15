@@ -1,7 +1,9 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, HttpResponseRedirect, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import User
 from .models import Event
+from logins.models import SignupData
 from .forms import EventForm, NotificationForm
 from .utility import send_whatsapp_message
 import os
@@ -46,7 +48,7 @@ def view_participants(request, slug):
 
     event = get_object_or_404(Event, tag=slug)
     participants = event.participants.all()
-    return render(request,'events/participants_list.html', {'DRIVER_PATH':DRIVER_PATH})
+    return render(request,'events/participants_list.html', {'participants':participants})
 
 #Creating an event
 @login_required(login_url="logins:login_view")
@@ -95,7 +97,7 @@ def update(request, slug=None):
         #messages.success(request, "Event details updated")
         return HttpResponseRedirect(instance.get_absolute_url())
     else:
-        return render(request, 'events/about.html')
+        pass
         #messages.error(request, "Could not update Event")
 
     context = {
@@ -120,6 +122,14 @@ def delete(request, slug=None):
         return redirect('events:index')
     else:
         return render(request, 'events/delete.html')
+
+def participate(request, slug):
+    event = Event.objects.get(tag=slug)
+    username = request.user
+    current_user = SignupData.objects.get(user=username)
+    print(current_user)
+    event.participants.add(current_user)
+    return redirect('events:index')
 
 def index(request):
     events = Event.objects.all().order_by('-date')

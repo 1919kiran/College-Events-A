@@ -17,17 +17,23 @@
       {% endif %}
       <br><br><br>
       <div class="row">
-
-          <div class="col-md-3"><button class="btn btn-primary btn-lg btn-block">Delete</button></div>
+        <div class="col-md-3">
+          <input type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='{% url "events:participate" event.tag %}" value="Participate" ></input>
+        </div>
           <div class="col-md-3">
-            <input type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='{% url 'events:view_participants' event.tag %}" value="View Participants" />
+            <input type="submit" class="btn btn-primary btn-lg btn-block" onclick="location.href='{% url 'events:view_participants' event.tag %}" value="View Participants" ></input>
           </div>
           <div class="col-md-3">
-            <input type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='{% url 'events:create_notification' event.tag %}" value="Create Notification" />
+            <input type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='{% url 'events:create_notification' event.tag %}" value="Create Notification" /></input>
+          </div>
+          <div class="col-md-3">
+            <input type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='{% url 'events:create_notification' event.tag %}" value="View Gallery" /></input>
           </div>
       </div>
+      <br><br><br>
     </div>
     <div class="col-md-3"></div>
+
   </div>
 
 {% endblock content %}
@@ -38,4 +44,4 @@
   </div>
 </footer>
 {% endblock footer %}
-onclick="location.href='{% url "events:view_participants" event.tag
+onclick="location.href='{% url "events:view_participants" event.tag %}'

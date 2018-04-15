@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block head_title %}{{ instance.name }}{% endblock head_title %}
-
 {% block content %}
 <br>
 <br>
@@ -9,15 +8,26 @@
 
 
 
-
+<div class="container" style="min-height:100%;">
 {% if list_of_events %}
 <ul>
 {% for event in list_of_events %}
-<li>
     <h3>
-<a href="{% url 'events:detail_of_event' event.id %}">{{event.name}}</a>
+      <center>
+        <div class="card" style="width: 18rem;">
+          {% if event.image %}
+            <img class="card-img-top" src="{{ event.image.url }}">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{event.name}}</h5>
+            <p class="card-text">{{event.description|truncatechars:50}}</p>
+            <a href="{% url 'events:detail_of_event' event.id %}" class="btn btn-primary">Go to event</a>
+          </div>
+        </div>
+      </center>
+      <br><br>
     </h3>
-</li>
+
 <!--
 <a href="">{{event.name}}</a>
 -->
@@ -31,32 +41,6 @@
 <button onclick="window.location.href='{% url 'events:select_club' %}'" class="btn btn-primary">Go back</button>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+</div>
 
 {% endblock content %}
-
-
-

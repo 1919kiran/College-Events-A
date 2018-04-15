@@ -5,6 +5,7 @@ from django.conf import settings
 from django.db.models.signals import pre_save
 from django.utils.timezone import now as timezone
 from django.urls import reverse
+from logins.models import SignupData
 import random, string
 from . utility import unique_slug_generator
 
@@ -33,7 +34,7 @@ class Event(models.Model):
     date = models.DateTimeField(default=datetime.now())
     organiser = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)#references to User model not UserProfile
     contact = models.EmailField(default="abc@gmail.com")
-    participants = models.ManyToManyField('logins.SignupData', default=1, unique=False, blank=True)
+    participants = models.ManyToManyField(SignupData, default=1, unique=False, blank=True)
 
     def __str__(self):
         return self.name

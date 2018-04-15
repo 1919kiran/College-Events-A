@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.template import loader
 from django.contrib.auth import login,logout
 from django.contrib import messages
-# Create your views here.
+from events.models import Event
 from django.contrib.auth.models import User
 from django.conf import settings
 from .forms import CustomUserCreationForm
@@ -68,3 +68,13 @@ def logout_view(request):
 
 def landing_page(request):
     return render(request, 'accounts/index.html',{})
+
+def view_profile(request):
+    events = Event.objects.all()
+    username = request.user
+    current_user = SignupData.objects.get(user=username)
+    list = []
+    for event in events:
+        if event.participants.exists():
+            list.append(event.name)
+    return render(request, 'logins/view_profile.html', {'list':list})

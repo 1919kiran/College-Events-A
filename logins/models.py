@@ -20,3 +20,6 @@ class SignupData(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def getfullname(self):
+        return str(self.first_name+' '+self.last_name)

@@ -29,8 +29,8 @@ def select_club(request):
 
 
 
-def detail_of_event(request,event_id):
-    event=get_object_or_404(Event,pk=event_id)
+def detail_of_event(request,slug):
+    event=get_object_or_404(Event,tag=slug)
     return render(request,'events/detail.html',{'event':event})
 
 
@@ -43,7 +43,7 @@ def detail(request, slug):
 
 @login_required(login_url="logins:login_view")
 def view_participants(request, slug):
-    
+
     event = get_object_or_404(Event, tag=slug)
     participants = event.participants.all()
     return render(request,'events/participants_list.html', {'DRIVER_PATH':DRIVER_PATH})
@@ -51,7 +51,7 @@ def view_participants(request, slug):
 #Creating an event
 @login_required(login_url="logins:login_view")
 def create(request):
-    form = EventForm(request.POST or None)
+    form = EventForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
@@ -88,7 +88,7 @@ def update(request, slug=None):
     event = Event.objects.get(tag=slug) #checking if logged in user is the organiser of the event
     organiser_of_event = event.organiser
     instance = get_object_or_404(Event, tag=slug)
-    form = EventForm(request.POST or None, instance=instance)
+    form = EventForm(request.POST or None, request.FILES or None, instance=instance)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()

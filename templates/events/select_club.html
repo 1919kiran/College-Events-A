@@ -4,53 +4,37 @@
 <br>
 <br>
 
-                    <form action="{% url 'events:select_club' %}" method="POST">
-                        {% csrf_token %}
-                        <label class="col-form-label  requiredField">
-                                                        Select club <span class="asteriskField">*</span>
-                                                    </label>
-                                <div class="">
-                                    <br>
-                                    <br>
-                                                <select name="club_name" class="select form-control" id="">
+<div class="container" style="min-height:100%;">
+  <form action="{% url 'events:select_club' %}" method="POST">
+    {% csrf_token %}
+    <label class="col-form-label  requiredField">
+                                                          Select club <span class="asteriskField">*</span>
+                                                      </label>
+    <div class="">
+      <br>
+      <br>
+      <select name="club_name" class="select form-control" id="">
 
-                                    <option value="swa">Swayam</option>
+                                      <option value="swa">Swayam</option>
 
-                                          <option value="eco">Eco Club</option>
+                                            <option value="eco">Eco Club</option>
 
-                                          <option value="art">Arts Club</option>
+                                            <option value="art">Arts Club</option>
 
-                                          <option value="abh">Abhinay</option>
+                                            <option value="abh">Abhinay</option>
 
-                                          <option value="thm">Theme Ballet</option>
+                                            <option value="thm">Theme Ballet</option>
 
-                                          <option value="vtk">Vasavi Talkies</option>
+                                            <option value="vtk">Vasavi Talkies</option>
 
-                                          <option value="csi">CSI</option>
-                                                </select>
-                                </div>
-                        <br>
-                        <br>
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </form>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+                                            <option value="csi">CSI</option>
+                                                  </select>
+    </div>
+    <br>
+    <br>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+</div>
+
 
 {% endblock content %}

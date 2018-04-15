@@ -145,13 +145,12 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATIC_URL = '/static/'
 
-if DEBUG:
-    MEDIA_URL = '/media/'
-    STATIC_ROOT = os.path.join(BASE_DIR, "static", "staticfiles")
-    MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, "static", "static"),
-    )
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static", "staticfiles")
+MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static", "static"),
+)
 
 #Allauth settings
 LOGIN_URL = 'accounts/login/'

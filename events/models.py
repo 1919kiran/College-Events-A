@@ -8,22 +8,29 @@ from django.urls import reverse
 import random, string
 from . utility import unique_slug_generator
 
+def upload_location(instance, filename):
+    return '%s/%s' %(instance.tag, filename)
+
 # Create your models here.
 class Event(models.Model):
     CLUB_LIST = (
         ('swa', 'Swayam'),
         ('eco','Eco Club'),
         ('art','Arts club'),
+        ('tst', 'Toast Masters'),
+        ('ora', 'Readers Club'),
         ('abh', 'Abhinay'),
         ('thm', 'Theme Ballet'),
         ('vtk', 'Vasavi talkies'),
-        #('it', 'Dept. Of Information Technology'),
-        ('csi', 'CSI')
+        ('csi', 'CSI'),
     )
     name = models.CharField(max_length = 32)
     tag = models.SlugField(max_length=50)
     club = models.CharField(max_length=12, choices=CLUB_LIST)#, default='it')
     description = models.TextField(default = '')
+    image = models.ImageField(upload_to=upload_location, null=True, blank=True, width_field="width_field", height_field="height_field")
+    height_field = models.IntegerField(default=0)
+    width_field = models.IntegerField(default=0)
     date = models.DateTimeField(default=datetime.now())
     organiser = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)#references to User model not UserProfile
     contact = models.EmailField(default="abc@gmail.com")

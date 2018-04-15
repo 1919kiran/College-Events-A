@@ -11,14 +11,14 @@ from . utility import unique_slug_generator
 # Create your models here.
 class Event(models.Model):
     CLUB_LIST = (
-        ('swa', 'Swayam'),
-        ('eco','Eco Club'),
-        ('art','Arts club'),
-        ('abh', 'Abhinay'),
-        ('thm', 'Theme Ballet'),
-        ('vtk', 'Vasavi talkies'),
+        ('Swayam', 'Swayam'),
+        ('EcoClub','Eco Club'),
+        ('ArtsClub','Arts club'),
+        ('Abhinay', 'Abhinay'),
+        ('ThemeBallet', 'Theme Ballet'),
+        ('VCETalkies', 'Vasavi talkies'),
         #('it', 'Dept. Of Information Technology'),
-        ('csi', 'CSI')
+        ('CSI', 'CSI')
     )
     name = models.CharField(max_length = 32)
     tag = models.SlugField(max_length=50)

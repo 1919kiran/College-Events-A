@@ -5,6 +5,8 @@ app_name='logins'
 
 urlpatterns = [
 
+    path('',views.landing_page,name='landing_page'),
+
     path('choose/',views.choose,name='choose'),
 
     path('index/', views.index, name='index'),

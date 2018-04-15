@@ -65,3 +65,6 @@ def logout_view(request):
         return redirect('events:index')
     else:
         return render(request,'logins/logout_page.html',{})
+
+def landing_page(request):
+    return render(request, 'accounts/index.html',{})

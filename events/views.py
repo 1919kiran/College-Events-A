@@ -43,7 +43,7 @@ def detail(request, slug):
 
 @login_required(login_url="logins:login_view")
 def view_participants(request, slug):
-    
+
     event = get_object_or_404(Event, tag=slug)
     participants = event.participants.all()
     return render(request,'events/participants_list.html', {'DRIVER_PATH':DRIVER_PATH})

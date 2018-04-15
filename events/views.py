@@ -1,4 +1,6 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, HttpResponseRedirect, redirect
+from django.core.mail import send_mail
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -71,13 +73,22 @@ def create_notification(request, slug):
     title = 'Contact'
     form = NotificationForm(request.POST or None)
     confirm_message = None
+    event = get_object_or_404(Event, tag=slug)
+    participants = event.participants.all()
+    from_email = settings.EMAIL_HOST_USER
+    to_list = ['iam191911918114@gmail.com']
+    for p in participants:
+        to_list.append(p.email)
+    print(to_list)
 
     if form.is_valid():
+
         body = form.cleaned_data['body']
         subject = 'Message from  from event '
         print(subject)
         message = 'asfdfdf\n'
-        send_whatsapp_message(message)
+        #send_whatsapp_message(message)
+        send_mail(subject, body, from_email, to_list, fail_silently=True)
         title = "Success!"
         confirm_message = "All the participants of this events are notified."
         form = None

@@ -12,13 +12,17 @@ from . utility import unique_slug_generator
 class Event(models.Model):
     CLUB_LIST = (
         ('swa', 'Swayam'),
-        ('it', 'Dept. Of Information Technology'),
-        ('swa', 'CSI'),
-        ('swa', 'TFI'),
+        ('eco','Eco Club'),
+        ('art','Arts club'),
+        ('abh', 'Abhinay'),
+        ('thm', 'Theme Ballet'),
+        ('vtk', 'Vasavi talkies'),
+        #('it', 'Dept. Of Information Technology'),
+        ('csi', 'CSI')
     )
     name = models.CharField(max_length = 32)
     tag = models.SlugField(max_length=50)
-    club = models.CharField(max_length=12, choices=CLUB_LIST, default='it')
+    club = models.CharField(max_length=12, choices=CLUB_LIST)#, default='it')
     description = models.TextField(default = '')
     date = models.DateTimeField(default=datetime.now())
     organiser = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)#references to User model not UserProfile

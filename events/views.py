@@ -11,10 +11,35 @@ from selenium import webdriver
 def about(request):
     return render(request, 'events/about.html')
 
+
+
+
+
+
+
+def select_club(request):
+    if request.method=='POST':
+        club_name=request.POST.get('club_name')
+        list_of_events=Event.objects.filter(club=club_name)
+        return render(request,'events/display_events_under_club.html',{'list_of_events':list_of_events})
+    else:
+        return render(request,'events/select_club.html',{})
+    pass
+
+
+
+
+def detail_of_event(request,event_id):
+    event=get_object_or_404(Event,pk=event_id)
+    return render(request,'events/detail.html',{'event':event})
+
+
+
 def detail(request, slug):
     event = get_object_or_404(Event, tag=slug)
     participants = event.participants.all()
     return render(request, 'events/detail.html', {'event':event})
+
 
 @login_required(login_url="logins:login_view")
 def view_participants(request, slug):

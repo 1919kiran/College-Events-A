@@ -31,7 +31,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url 'accounts:view_profile' %}">View Profile</a>
-          <a class="dropdown-item" href="#">View by Clubs</a>
+          <a class="dropdown-item" href="{% url 'events:select_club' %}">View by Clubs</a>
           {% if  request.user.is_superuser or request.user.signupdata.user_type == 'org' %}
             <a class="dropdown-item" href="{% url 'events:create' %}">Create Event</a>
           {% endif %}

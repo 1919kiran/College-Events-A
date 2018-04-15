@@ -7,6 +7,7 @@ class EventForm(forms.ModelForm):
         fields = [
             "name",
             "tag",
+            "club",
             "description",
             "date",
             "organiser",

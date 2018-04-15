@@ -42,19 +42,6 @@ def display_ans(request,question_id):
     return render(request, 'forum/display_answers.html', context)
 
 
-'''        ans = request.POST.get('answer','')
-
-        question.answer_set.create(answer_text=ans)
-
-        answers = question.answer_set.all()
-
-        context = {'question': question, 'answers': answers}
-
-        return render(request, 'forum/display_answers.html', context)
-
-    return render(request, 'forum/display_answers.html', {'question': question})
-    pass
-'''
 
 @login_required(login_url="logins:login_view")
 def ask(request):
@@ -73,3 +60,8 @@ def ask_questions(request):
         context = {'all_questions': all_questions}
         return render(request,'forum/display_questions.html',context)
     return render(request,'forum/start_page.html',{})
+
+
+
+
+
